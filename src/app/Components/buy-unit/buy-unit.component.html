@@ -1,0 +1,64 @@
+
+<div class="container">
+  <form *ngIf="!showTable" #paymentForm="ngForm" (ngSubmit)="onSubmit(paymentForm)">
+    <h3>User Payment</h3>
+    <fieldset>
+      <input name="price" ngModel class="form-input" placeholder="Price" type="text" required autofocus>
+    </fieldset>
+    <fieldset>
+      <select class="form-input" name="installmentPlan" ngModel required>
+        <option value="" disabled>Select an Installment Plan</option>
+        <option *ngFor="let plan of installmentPlans" [value]="plan.id">{{ plan.label }}</option>
+      </select>
+    </fieldset>
+    <fieldset>
+      <input name="startDate" ngModel class="form-input" placeholder="Start Date" type="date" required>
+    </fieldset>
+    <fieldset>
+      <input name="yearsCount" ngModel class="form-input" placeholder="Years Count" type="number" min="0" required>
+    </fieldset>
+    <fieldset>
+      <button class="form-button" type="submit">Submit</button>
+    </fieldset>
+  </form>
+
+  <table *ngIf="showTable" class="data-table">
+    <thead>
+      <tr>
+        <th>Installment Number</th>
+        <th>Installment Date</th>
+        <th>Installment Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let payment of paymentData">
+        <td># {{ payment.installmentNumber }}</td>
+        <td>{{ payment.installmentDate | date:'dd - MM - yyyy' }}</td>
+        <td>{{ payment.installmentAmount | currency:'EGP'}} EGP</td>
+      </tr>   
+    
+    </tbody>
+  
+  </table>
+
+<br>
+<button *ngIf="showTable" class="form-button" type="button" (click)="navigateToDashboard()">Back To Dashboard</button>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

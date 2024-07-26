@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Listings</title> <!-- Added a title for the page -->
+</head>
+
+<body>
+    <h1>All Units</h1>
+    <div class="grid-container"  *ngIf="units.length > 0 ">
+
+        <div class="card" *ngFor="let unit of units" [ngStyle]="{'background-color': unit.availabilityStatus ? '#27AE60' : 'red'}">
+            <h2>Unit No. {{unit.unitName}}</h2>
+            <p>Room Count : {{unit.roomCount}}</p>
+            <p>Floor : {{unit.floor}}</p>
+            <p>View : {{unit.view}}</p>
+            <button class="card-btn" [disabled]="!unit.availabilityStatus" (click)="navigateToDetails(unit.id)">View Details</button>
+        </div>
+
+    </div>
+
+    <div *ngIf="units.length === 0">
+        <p>No units found.</p>
+    </div>
+
+
+    <a href="/logout" class="logout-link">Logout</a>
+</body>
+
+</html>
